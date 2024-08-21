@@ -1,0 +1,26 @@
+h1{
+    text-align: center;
+}
+
+.QRimg{
+    margin:0 auto;
+}
+
+.img-center{
+    margin: 0 auto;
+    text-align: center;
+}
+
+p{
+    text-align: center;
+}
+
+button{
+    display:block;
+    background-color: green;
+    color: #fefefe;
+    margin:10px auto;
+    padding:10px 20px;
+    font-size: large;
+    border:none;
+}
