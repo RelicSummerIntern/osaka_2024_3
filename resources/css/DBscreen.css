@@ -3,5 +3,9 @@ body{
 }
 
 table{
-    border:#000;
+    border:#000 bold 1px;
+}
+
+table:nth-of-type(2n){
+    background-color: #555;
 }
