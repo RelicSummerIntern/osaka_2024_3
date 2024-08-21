@@ -20,7 +20,7 @@
   </thead>
   <tbody>
     <tr>
-      <th><input type="radio"></th>
+      <th><input type="checkbox"></th>
       <td>name</td>
       <td>time</td>
       <td>time</td>
@@ -28,7 +28,7 @@
       <td>seat</td>
     </tr>
     <tr>
-      <th><input type="radio"></th>
+      <th><input type="checkbox"></th>
       <td>name</td>
       <td>time</td>
       <td>time</td>
