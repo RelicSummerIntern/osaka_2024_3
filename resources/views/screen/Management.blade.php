@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../css/DBscreen.css">
+    <link rel="stylesheet" href="../../css/DBscreen.css">
 </head>
 <body>
 <table>
@@ -20,7 +20,7 @@
   </thead>
   <tbody>
     <tr>
-      <th><input type="radio"></th>
+      <th><input type="checkbox"></th>
       <td>name</td>
       <td>time</td>
       <td>time</td>
@@ -28,7 +28,7 @@
       <td>seat</td>
     </tr>
     <tr>
-      <th><input type="radio"></th>
+      <th><input type="checkbox"></th>
       <td>name</td>
       <td>time</td>
       <td>time</td>
