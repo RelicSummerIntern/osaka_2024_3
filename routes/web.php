@@ -28,6 +28,7 @@ Route::get('/credit-info', function () {
 
 Route::group(['prefix' => 'tickets', 'as' => 'tickets.'], function () {
     Route::get('show/{id}', [TicketsController::class, 'show'])->name('show');
+    Route::get('code/{id}', [TicketsController::class, 'show_code'])->name('code');
   });
 
 Route::get('/purchased', function () {
@@ -37,6 +38,10 @@ Route::get('/purchased', function () {
 Route::get('/exit', function () {
     return view('exit');
 })->name('exit');
+
+Route::get('/ticket', function () {
+    return view('ticket');
+})->name('ticket');
 
 
 Route::middleware('auth')->group(function () {
