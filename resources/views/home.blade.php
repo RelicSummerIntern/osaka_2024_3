@@ -1,11 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="image">
-    <img src="{{ asset('image/img_24fc77a70077388fffb1304d6f511763255381.avif')}}" alt="top"/>
-</div>
-<div>
-    <h1 class="info">見たい試合を見ることが出来る</h1>
+<img class="image" src="{{ asset('/image/img_24fc77a70077388fffb1304d6f511763255381.jpg')}}" alt="top"/>
+
+<div class="main-info">
+    <h1 class="small-info">見たい試合を選択できます</h1>
     <p>relicketで簡単購入</p>
     <h1>試合終了30分後料金が発生いたします（100円/10分）</h1>
 </div>
