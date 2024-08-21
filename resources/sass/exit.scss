@@ -3,9 +3,13 @@ h1{
     text-align: center;
 }
 
-.QRimg{
-    margin: 0 auto;
+.img-center{
+    
     text-align: center;
+}
+img{
+  display: block;
+  margin: auto;
 }
 
 .text-1{
@@ -23,7 +27,7 @@ margin-bottom: 2px;
     width: 540px;
     border:dotted green;
     margin: 0 auto;
-    padding: 1.5rem;
+    padding: 10px;
   }
   
   #time {

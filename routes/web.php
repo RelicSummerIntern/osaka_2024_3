@@ -26,6 +26,19 @@ Route::get('/credit-info', function () {
     return view('credit-info');
 })->name('credit-info');
 
+Route::group(['prefix' => 'tickets', 'as' => 'tickets.'], function () {
+    Route::get('show/{id}', [TicketsController::class, 'show'])->name('show');
+  });
+
+Route::get('/purchased', function () {
+    return view('purchased');
+})->name('kounyuu');
+
+Route::get('/exit', function () {
+    return view('exit');
+})->name('exit');
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
