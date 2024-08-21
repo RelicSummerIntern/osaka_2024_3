@@ -22,6 +22,9 @@ use App\Http\Controllers\TicketsController;
 Route::get('/', [TicketsController::class, 'index'])->name('home');
 Route::get('/home', [TicketsController::class, 'index'])->name('home');
 
+Route::group(['prefix' => 'tickets', 'as' => 'tickets.'], function () {
+    Route::get('show/{id}', [TicketsController::class, 'show'])->name('show');
+  });
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
