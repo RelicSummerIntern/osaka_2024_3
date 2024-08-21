@@ -11,11 +11,6 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('post.index')" :active="request()->routeIs('post.index')" class="text-decoration-none">
-                        {{ __('掲示板') }}
-                    </x-nav-link>
-                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -53,7 +48,12 @@
                     </x-slot>
                 </x-dropdown>
                 @else
+    
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <p class="text-decoration-none_1">チケット購入</p>
+                    <p class="text-decoration-none_1">マイチケット</p>
+                    <p class="text-decoration-none_1">contact</p>
+
                     <x-nav-link :href="route('register')" :active="request()->routeIs('register')" class="text-decoration-none">
                         {{ __('Register') }}
                     </x-nav-link>
