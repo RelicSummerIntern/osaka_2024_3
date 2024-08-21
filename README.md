@@ -32,7 +32,7 @@ docker-compose up -d
 docker-compose exec laravel.test npm run dev
 ```
 
-## 停止する方法
+## 停止するには下記のコマンドを実行する方法
 
 ```sh
 docker-compose stop
