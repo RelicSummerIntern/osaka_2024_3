@@ -23,8 +23,25 @@
         <p>△</p>
     </div>
     <div>
-        <p>E高校 VS F高校</p>
-        <p>×</p>
+        <div>
+        <h1>本日の試合</h1>
+        <p>発売中◎　残り僅か△　売り切れ×</p>
+        </div>
+        @foreach($games as $game)
+        <div>
+            <p>
+                <?php $btw = "vs"; ?>
+                @foreach($teams as $team)
+                @if($game->id == $team->id)
+                {{$team->team_name . $btw}}
+                <?php $btw = ""; ?>
+                @endif
+                @endforeach
+            </p>
+            <p>◎</p>
+        </div>
+        @endforeach
+        <button>翌日へ</button>
     </div>
     <button>翌日へ</button>
 </div>

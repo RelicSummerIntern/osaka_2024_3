@@ -14,6 +14,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/sass/app.scss', 'resources/js/app.js', 'resources/css/home.css'])
 
+
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -39,5 +40,6 @@
                 @yield('content')
             </main>
         </div>
+        @include('layouts.footer')
     </body>
 </html>
