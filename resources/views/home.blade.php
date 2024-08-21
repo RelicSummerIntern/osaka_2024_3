@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="jp">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../css/DBscreen.css">
-</head>
+@extends('layouts.app')
+
+@section('content')
 <div class="image">
-    <img src="resources/views/screen/image" alt="Toppage"/>
+    <img src="{{ asset('image/img_24fc77a70077388fffb1304d6f511763255381.avif')}}" alt="top"/>
 </div>
 <div>
     <h1 class="info">見たい試合を見ることが出来る</h1>
@@ -61,5 +56,5 @@
         30分を超過した場合、10分ごとに100円の延長料金が発生いたします。
         お時間に余裕を持ってのご退場にご協力いただけますと幸いです。ご理解とご協力をお願い申し上げます。</p>
 </div>
-
+@endsection
 
