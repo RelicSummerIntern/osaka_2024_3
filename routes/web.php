@@ -3,6 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\GameTimesController;
+use App\Http\Controllers\TicketsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +18,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
 
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [TicketsController::class, 'index'])->name('home');
+Route::get('/home', [TicketsController::class, 'index'])->name('home');
+
+Route::get('/credit-info', function () {
+    return view('credit-info');
+})->name('credit-info');
+
+Route::group(['prefix' => 'tickets', 'as' => 'tickets.'], function () {
+    Route::get('show/{id}', [TicketsController::class, 'show'])->name('show');
+  });
 
 Route::get('/purchased', function () {
     return view('purchased');
@@ -34,6 +41,7 @@ Route::get('/exit', function () {
 Route::get('/ticket', function () {
     return view('ticket');
 })->name('ticket');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -49,6 +57,18 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/myposts', [PostController::class, 'myPosts'])->name('myposts');
 });
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
+    Route::get('login', [AdminLoginController::class, 'index'])->name('index');
+    Route::post('login', [AdminLoginController::class, 'login'])->name('login');
+    Route::get('logout', [AdminLoginController::class, 'logout'])->name('logout');
+
+    Route::get('/', [AdminLoginController::class, 'dashboard'])->middleware(['auth:admin'])->name('dashboard');
+});
+
+Route::group(['prefix' => 'gameTimes', 'as' => 'gameTimes.'], function () {
+    Route::get('update/{id}', [GameTimesController::class, 'update'])->name('update');
+  });
 
 require __DIR__.'/auth.php';
 
