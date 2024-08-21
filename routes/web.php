@@ -3,6 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\GameTimesController;
+use App\Http\Controllers\TicketsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
 
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [TicketsController::class, 'index'])->name('home');
+Route::get('/home', [TicketsController::class, 'index'])->name('home');
 
 
 Route::middleware('auth')->group(function () {
@@ -38,6 +37,18 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/myposts', [PostController::class, 'myPosts'])->name('myposts');
 });
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
+    Route::get('login', [AdminLoginController::class, 'index'])->name('index');
+    Route::post('login', [AdminLoginController::class, 'login'])->name('login');
+    Route::get('logout', [AdminLoginController::class, 'logout'])->name('logout');
+
+    Route::get('/', [AdminLoginController::class, 'dashboard'])->middleware(['auth:admin'])->name('dashboard');
+});
+
+Route::group(['prefix' => 'gameTimes', 'as' => 'gameTimes.'], function () {
+    Route::get('update/{id}', [GameTimesController::class, 'update'])->name('update');
+  });
 
 require __DIR__.'/auth.php';
 
