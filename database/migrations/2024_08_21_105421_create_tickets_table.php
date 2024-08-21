@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->integer('game_id');
-            $table->integer('seat_number_id');
-            $table->integer('conpetition_id');
+            $table->bigInteger('game_id')->unsigned();
+            $table->bigInteger('seat_number_id')->unsigned();
             $table->timestamps();
         });
     }

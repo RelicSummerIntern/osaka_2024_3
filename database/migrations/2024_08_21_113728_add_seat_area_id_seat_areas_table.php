@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('conpetition', function (Blueprint $table) {
-            $table->id();
-            $table->string('conpetition_name');
-            $table->timestamps();
+        Schema::table('seat_number', function (Blueprint $table) {
+
+            $table->foreign('seat_area_id')
+            ->references('id')->on('seat_areas')
+            ->onDelete('cascade');
         });
     }
 
@@ -23,6 +24,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('conpetition');
+        Schema::table('seat_number', function (Blueprint $table) {
+            $table->dropForeign(['seat_area_id']);
+        });
     }
 };

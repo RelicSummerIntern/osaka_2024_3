@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('seat_number', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('seat_area_id')->unsigned();
+            $table->string('name');
             $table->timestamps();
         });
     }

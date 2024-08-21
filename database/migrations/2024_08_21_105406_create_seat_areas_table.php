@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('seat_areas', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('conpetition_id');
-            $table->integer('price');
+            $table->bigInteger('tournament_id')->unsigned();
+            $table->bigInteger('price')->unsigned();
             $table->timestamps();
         });
     }

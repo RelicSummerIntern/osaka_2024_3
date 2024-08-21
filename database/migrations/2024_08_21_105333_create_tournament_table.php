@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('game_team', function (Blueprint $table) {
+        Schema::create('tournament', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('game_id')->unsigned();
-            $table->bigInteger('team_id')->unsigned();
+            $table->string('tournament_name');
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('game_team');
+        Schema::dropIfExists('tournament');
     }
 };

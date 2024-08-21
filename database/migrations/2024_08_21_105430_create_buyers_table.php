@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('buyers', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->integer('ticket_id');
-            $table->integer('order_number')->unique();
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('ticket_id')->unsigned();
+            $table->bigInteger('order_number')->unique();
             $table->timestamps();
         });
     }

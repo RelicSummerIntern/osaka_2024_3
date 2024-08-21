@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('game_times', function (Blueprint $table) {
             $table->id();
-            $table->integer('game_id');
+            $table->bigInteger('game_id')->unsigned();
             $table->time('actual_start_time');
-            $table->time('actual_end_time')->nullable();;
+            $table->time('actual_end_time')->nullable();
             $table->timestamps();
         });
     }
