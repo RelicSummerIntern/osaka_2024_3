@@ -28,6 +28,7 @@ Route::get('/credit-info', function () {
 
 Route::group(['prefix' => 'tickets', 'as' => 'tickets.'], function () {
     Route::get('show/{id}', [TicketsController::class, 'show'])->name('show');
+    Route::get('code/{id}', [TicketsController::class, 'show_code'])->name('code');
   });
 
 Route::get('/purchased', function () {

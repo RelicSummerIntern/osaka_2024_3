@@ -13,6 +13,8 @@ class TicketsController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    #TOPページ用
     public function index()
     {
         $games = DB::select('SELECT DISTINCT g.id, g.date, g.scheduled_start_time, g.scheduled_end_time, gtimes.actual_start_time,gtimes.actual_end_time,tou.tournament_name FROM games g LEFT OUTER JOIN game_times gtimes ON g.id = gtimes.game_id LEFT OUTER JOIN game_team gteam ON g.id = gteam.game_id LEFT OUTER JOIN teams t ON gteam.team_id = t.id LEFT OUTER JOIN tournament tou ON t.tournament_id = tou.id WHERE tou.id = 1;');
@@ -23,9 +25,23 @@ class TicketsController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+
+     #座席指定ページ用
+    public function show($id)
+    {
+        $tickets = DB::select('SELECT DISTINCT g.id, g.date, g.scheduled_start_time, tou.tournament_name, sn.name AS seat_number,sa.name AS seat_name, b.id AS buyer_id FROM tickets tic LEFT OUTER JOIN games g ON tic.game_id = g.id LEFT OUTER JOIN game_times gtimes ON g.id = gtimes.game_id LEFT OUTER JOIN game_team gteam ON g.id = gteam.game_id LEFT OUTER JOIN teams t ON gteam.team_id = t.id LEFT OUTER JOIN tournament tou ON t.tournament_id = tou.id LEFT OUTER JOIN seat_number sn ON tic.seat_number_id = sn.id LEFT OUTER JOIN seat_areas sa ON sn.seat_area_id = sa.id LEFT OUTER JOIN buyers b ON tic.id = b.ticket_id WHERE g.id ='.$id);
+        return view('tickets.show', compact('tickets'));
+    }
+
+
+    /**
      * Show the form for creating a new resource.
      */
-    public function create(int $seat_number_id, int $game_id)
+
+    #枚数選択ページ用
+    public function create($seat_number_id,$game_id)
     {
         $tickets = DB::select('SELECT DISTINCT g.id, g.date, g.scheduled_start_time, tou.tournament_name, sn.name AS seat_number,sa.name AS seat_name, tic.id AS ticket_id, b.id AS buyer_id FROM tickets tic LEFT OUTER JOIN games g ON tic.game_id = g.id LEFT OUTER JOIN game_times gtimes ON g.id = gtimes.game_id LEFT OUTER JOIN game_team gteam ON g.id = gteam.game_id LEFT OUTER JOIN teams t ON gteam.team_id = t.id LEFT OUTER JOIN tournament tou ON t.tournament_id = tou.id LEFT OUTER JOIN seat_number sn ON tic.seat_number_id = sn.id LEFT OUTER JOIN seat_areas sa ON sn.seat_area_id = sa.id LEFT OUTER JOIN buyers b ON tic.id = b.ticket_id WHERE g.id = '.$game_id.' AND sn.id = '.$seat_number_id);
         return view('tickets.create', compact('tickets'));
@@ -34,29 +50,27 @@ class TicketsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+    # 枚数選択後データ保存
     public function store(Request $request)
     {
-        $order_code = mt_rand(1000000, 9999999);
+        $order_number = mt_rand(1000000, 9999999);
         $buyer = new Buyers;
         $buyer->user_id = Auth::id();
         $buyer->ticket_id = $request->ticket_id;
-        $buyer->order_number = $order_code;
+        $buyer->order_number = $order_number;
 
         $buyer->save();
 
-        //一覧表示画面にリダイレクト
-        return redirect(`tickets/code/$order_code`);
+        return redirect(`tickets/code/$order_number`);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
+    # QRコードを表示
+    public function show_code(Request $request,$order_number)
     {
-        $tickets = DB::select('SELECT DISTINCT g.id, g.date, g.scheduled_start_time, tou.tournament_name, sn.name AS seat_number,sa.name AS seat_name, b.id AS buyer_id FROM tickets tic LEFT OUTER JOIN games g ON tic.game_id = g.id LEFT OUTER JOIN game_times gtimes ON g.id = gtimes.game_id LEFT OUTER JOIN game_team gteam ON g.id = gteam.game_id LEFT OUTER JOIN teams t ON gteam.team_id = t.id LEFT OUTER JOIN tournament tou ON t.tournament_id = tou.id LEFT OUTER JOIN seat_number sn ON tic.seat_number_id = sn.id LEFT OUTER JOIN seat_areas sa ON sn.seat_area_id = sa.id LEFT OUTER JOIN buyers b ON tic.id = b.ticket_id WHERE g.id ='.$id);
-        return view('tickets.show', compact('tickets'));
+        $tickets = DB::select('SELECT b.order_number FROM buyers b LEFT OUTER JOIN tickets tic ON b.ticket_id = tic.id LEFT OUTER JOIN games g ON tic.game_id = g.id LEFT OUTER JOIN game_times gtimes ON g.id = gtimes.game_id LEFT OUTER JOIN game_team gteam ON g.id = gteam.game_id LEFT OUTER JOIN teams t ON gteam.team_id = t.id LEFT OUTER JOIN tournament tou ON t.tournament_id = tou.id LEFT OUTER JOIN seat_number sn ON tic.seat_number_id = sn.id LEFT OUTER JOIN seat_areas sa ON sn.seat_area_id = sa.id WHERE b.order_number ='.$order_number);
+        return view(`tickets.code`, compact('tickets'));
     }
-
     /**
      * Show the form for editing the specified resource.
      */
