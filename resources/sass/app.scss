@@ -6,3 +6,27 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+
+.data-table {
+    padding: 20px;
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+      width: 100%;
+      font-size: 14px;
+      line-height: 1.5;
+      table-layout: fixed;
+      word-break: break-all;
+
+      tr {
+        border-bottom: solid 1px #eee;
+      }
+
+      th,
+      td {
+        text-align: center;
+        padding: 15px 10px;
+      }
+    }
+  }
