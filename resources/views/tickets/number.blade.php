@@ -3,9 +3,6 @@
 @section('content')
 
     <link rel="stylesheet" href="../../resources/sass/ticket.scss">
-    @php
-    var_dump($tickets)
-    @endphp
     @foreach($tickets as $ticket)
     <h1>枚数を選択してください</h1>
     <p>{{$ticket->tournament_name}}</p>
