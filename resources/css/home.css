@@ -1,7 +1,81 @@
-.image{
-    width: 100;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
 }
 
-.info{
-    color: aqua;
+.image img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+}
+
+.info-section {
+    padding: 20px;
+    background-color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.info-section h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.info-section p {
+    font-size: 16px;
+}
+
+.games-section {
+    padding: 20px;
+    background-color: #fff;
+    margin-bottom: 20px;
+}
+
+.today-games-header h1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.games-section .game {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.purchase-section {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: #fff;
+    margin-bottom: 20px;
+}
+
+.game-card {
+    text-align: center;
+    background-color: #e3e3e3;
+    padding: 10px;
+    border-radius: 5px;
+    width: 30%;
+}
+
+.game-card img {
+    width: 100%;
+    height: auto;
+}
+
+.game-card button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.game-card button:hover {
+    background-color: #0056b3;
 }
