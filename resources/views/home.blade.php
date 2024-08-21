@@ -17,23 +17,6 @@
             <h1>本日の試合</h1>
             <p>発売中◎　残り僅か△　売り切れ×</p>
         </div>
-<<<<<<< HEAD
-
-        <div class="games-list">
-            <!-- 動的に試合情報を表示 -->
-            <div class="game">
-                <p>A高校 VS B高校</p>
-                <p>◎</p>
-            </div>
-            <div class="game">
-                <p>C高校 VS D高校</p>
-                <p>△</p>
-            </div>
-            <div class="game">
-                <p>E高校 VS F高校</p>
-                <p>△</p>
-            </div>
-=======
         @foreach($games as $game)
         <div>
             <p>
@@ -82,8 +65,8 @@
             };
             @endphp
             <p><a href="{{ route( 'tickets.show',['id'=>$game->id] )}}">{{ $icon }}</a></p>
->>>>>>> 9f2b9af1edefbf94beb3a26813289efb9fa54096
         </div>
+        @endforeach
         <button>翌日へ</button>
     </div>
 
