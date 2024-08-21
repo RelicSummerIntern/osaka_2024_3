@@ -17,6 +17,22 @@
             <h1>本日の試合</h1>
             <p>発売中◎　残り僅か△　売り切れ×</p>
         </div>
+
+        <div class="games-list">
+            <!-- 動的に試合情報を表示 -->
+            <div class="game">
+                <p>A高校 VS B高校</p>
+                <p>◎</p>
+            </div>
+            <div class="game">
+                <p>C高校 VS D高校</p>
+                <p>△</p>
+            </div>
+            <div class="game">
+                <p>E高校 VS F高校</p>
+                <p>△</p>
+            </div>
+
         @foreach($games as $game)
         <div>
             <p>
@@ -65,6 +81,7 @@
             };
             @endphp
             <p><a href="{{ route( 'tickets.show',['id'=>$game->id] )}}">{{ $icon }}</a></p>
+         main
         </div>
         @endforeach
         <button>翌日へ</button>
@@ -97,6 +114,5 @@
         <p>退出に関する重要事項は以下の通りです</p>
         <p>試合終了後30分間は無料でお過ごしいただけます。30分を超過した場合、10分ごとに100円の延長料金が発生いたします。お時間に余裕を持ってのご退場にご協力いただけますと幸いです。ご理解とご協力をお願い申し上げます。</p>
     </div>
-
 @endsection
 
