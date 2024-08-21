@@ -20,5 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(initGameTeamsSeeder::class);
         $this->call(initGameTimesSeeder::class);
         $this->call(initTicketsSeeder::class);
+        $this->call(initAdminSeeder::class);
+        $this->call(initWorkerSeeder::class);
     }
 }
