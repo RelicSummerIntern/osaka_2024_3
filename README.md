@@ -46,7 +46,7 @@ phpMyAdmin: http://localhost:8080/
 ## コマンドリファレンス
 
 ```sh
-# MySQLコンソールにログイン
+# MySQLコンソールにログインする
 docker-compose exec mysql mysql -u sail -p'password' example_app
 
 # キャッシュ削除
