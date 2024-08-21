@@ -1,13 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset='utf-8'>
-<title>Stopwatch</title>
-<link rel='stylesheet' href='../../css/exit.css'>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('content')
+
+
+
+  <link rel='stylesheet' href='resources/sass/exit.scss'>
+
   <h1>試合が終了しました。<br>退出してください</h1>
-  <div class="QRimg"><img src="https://api.qrserver.com/v1/create-qr-code/?data=(URL)" alt="QRcode"></div>
+  <div class="QRimg">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?data=(URL)" alt="QRcode">
+  </div>
   <p class="text-1">※退場する際は上記のQRコードを読みこませてください</p>
   <p class="text-2">試合終了からの<br>経過時間</p>
   <div id="container">
@@ -21,5 +23,5 @@
 
 
   <script src='../../js/exit.js'></script>
-</body>
-</html>
+
+@endsection
