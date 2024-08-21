@@ -23,6 +23,9 @@ Route::get('/home', function () {
     return view('home');
 })->name('home');
 
+Route::get('/credit-info', function () {
+    return view('credit-info');
+})->name('credit-info');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
