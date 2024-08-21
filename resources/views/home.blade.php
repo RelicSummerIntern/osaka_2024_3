@@ -82,8 +82,8 @@
             };
             @endphp
             <p><a href="{{ route( 'tickets.show',['id'=>$game->id] )}}">{{ $icon }}</a></p>
-         main
         </div>
+        @endforeach
 
         <button class="next-day-button">翌日へ</button>
 
