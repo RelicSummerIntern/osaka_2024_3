@@ -23,6 +23,13 @@ Route::get('/home', function () {
     return view('home');
 })->name('home');
 
+Route::get('/purchased', function () {
+    return view('purchased');
+})->name('kounyuu');
+
+Route::get('/exit', function () {
+    return view('exit');
+})->name('exit');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
