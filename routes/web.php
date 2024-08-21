@@ -5,6 +5,7 @@ use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\GameTimesController;
+use App\Http\Controllers\TicketsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,13 +18,9 @@ use App\Http\Controllers\GameTimesController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
 
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [TicketsController::class, 'index'])->name('home');
+Route::get('/home', [TicketsController::class, 'index'])->name('home');
 
 
 Route::middleware('auth')->group(function () {

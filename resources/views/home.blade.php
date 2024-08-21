@@ -1,16 +1,9 @@
-<x-app-layout>
+@extends('layouts.app')
 
+@section('content')
 
-    <!-- <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <a href="{{ route('post.index') }}" class="bg-white border-b border-gray-200 p-6 block w-full text-center
-                font-semibold text-gray-800 hover:bg-gray-100 text-decoration-none">
-                    掲示板へ移動
-                </a>
-            </div>
-        </div>
-    </div> -->
+<div>
+
     <div>
         <img src="resources/views/screen/image" alt="Toppage"/>
     </div>
@@ -24,18 +17,20 @@
         <h1>本日の試合</h1>
         <p>発売中◎　残り僅か△　売り切れ×</p>
         </div>
+        @foreach($games as $game)
         <div>
-            <p>A高校 VS B高校</p>
+            <p>
+                <?php $btw = "vs"; ?>
+                @foreach($teams as $team)
+                @if($game->id == $team->id)
+                {{$team->team_name . $btw}}
+                <?php $btw = ""; ?>
+                @endif
+                @endforeach
+            </p>
             <p>◎</p>
         </div>
-        <div>
-            <p>C高校 VS D高校</p>
-            <p>△</p>
-        </div>
-        <div>
-            <p>E高校 VS F高校</p>
-            <p>×</p>
-        </div>
+        @endforeach
         <button>翌日へ</button>
     </div>
     <div>
@@ -66,4 +61,7 @@
          30分を超過した場合、10分ごとに100円の延長料金が発生いたします。
          お時間に余裕を持ってのご退場にご協力いただけますと幸いです。ご理解とご協力をお願い申し上げます。</p>
     </div>
-</x-app-layout>
+</div>
+
+
+@endsection
