@@ -38,7 +38,43 @@
                 @endif
                 @endforeach
             </p>
-            <p>◎</p>
+            @php
+                $sold_count = 0;
+                $selling_count = 0;
+            @endphp
+            @foreach($sold as $row)
+            @if($game->id == $row->id)
+                @php
+                if(empty($row->sold_num)){
+                    $sold_count = 0;
+                }else{
+                    $sold_count = $row->sold_num;
+                }
+                @endphp
+            @endif
+            @endforeach
+            @foreach($selling as $row)
+            @if($game->id == $row->id)
+                @php
+                $selling_count = $row->selling_num;
+                @endphp
+            @endif
+            @endforeach
+            @php
+            if ($sold_count > 0 && $selling_count > 0) {
+                $count = $sold_count / $selling_count;
+            } else {
+                $count = 100; // $selling_count が 0 の場合の処理
+            }
+            if($count > 80){
+                $icon = "◎";
+            }elseif ($count > 40) {
+                $icon = "△";
+            }else{
+                $icon = "×";
+            };
+            @endphp
+            <p><a href="{{ route( 'tickets.show',['id'=>$game->id] )}}">{{ $icon }}</a></p>
         </div>
         @endforeach
         <button>翌日へ</button>

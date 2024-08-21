@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>購入完了</title>
-    <link rel="stylesheet" href="../../css/purchased.css">
-</head>
-<body>
+
+
+@extends('layouts.app')
+
+@section('content')
+
+<link rel="stylesheet" href="./resources/sass/purchased.scss">
     <h1>チケットの購入が<br>完了しました</h1>
     <div class="img-center">
 <!--(URL)の部分を変更するとそのQRコードができる-->
@@ -15,5 +13,5 @@
     <p>入場する際は上記のQRコードを読み取りしてください</p>
 
     <button class="button">TOPへ</button>
-</body>
-</html>
+
+@endsection
