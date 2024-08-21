@@ -1,81 +1,59 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;
-    color: #333;
+
+/* レイアウトセクション */
+.layout-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
-.image img {
+/* 画像ラッパー */
+.image-wrapper {
+    flex: 1;
+    max-width: 50%;
+    padding-right: 20px;
+}
+
+.seat-select-img {
     width: 100%;
     height: auto;
-    max-height: 400px;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 5px;
 }
 
-.info-section {
+/* 詳細ラッパー */
+.details-wrapper {
+    flex: 1;
+    max-width: 50%;
+    background-color: white;
     padding: 20px;
-    background-color: #fff;
-    text-align: center;
-    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.info-section h1 {
-    font-size: 24px;
+/* 試合詳細 */
+.match-details {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
     margin-bottom: 10px;
 }
 
-.info-section p {
+.match-details p {
     font-size: 16px;
+    color: #666;
+    margin: 0;
 }
 
-.games-section {
-    padding: 20px;
-    background-color: #fff;
-    margin-bottom: 20px;
+.match-details h1 {
+    font-size: 24px;
+    color: #333;
+    margin: 0;
 }
 
-.today-games-header h1 {
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-.games-section .game {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-}
-
-.purchase-section {
-    display: flex;
-    justify-content: space-around;
-    padding: 20px;
-    background-color: #fff;
-    margin-bottom: 20px;
-}
-
-.game-card {
-    text-align: center;
-    background-color: #e3e3e3;
-    padding: 10px;
-    border-radius: 5px;
-    width: 30%;
-}
-
-.game-card img {
-    width: 100%;
-    height: auto;
-}
-
-.game-card button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.game-card button:hover {
-    background-color: #0056b3;
+/* 座席詳細 */
+.seat-details p {
+    font-size: 16px;
+    color: #333;
+    margin: 5px 0;
 }

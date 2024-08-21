@@ -15,7 +15,7 @@
 
 
 
-        @vite(['resources/css/app.css','resources/sass/purchased.scss','resources/sass/exit.scss','resources/sass/app.scss', 'resources/js/app.js','resources/css/home.css', 'resources/css/credit.css'])
+        @vite(['resources/css/app.css','resources/sass/purchased.scss','resources/sass/exit.scss','resources/sass/app.scss', 'resources/js/app.js','resources/css/home.css', 'resources/css/credit.css', 'seat-select.css'])
 
 
 

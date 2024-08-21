@@ -38,6 +38,9 @@ Route::get('/exit', function () {
     return view('exit');
 })->name('exit');
 
+Route::get('/seat-select', function () {
+    return view('seat-select');
+})->name('seat-select');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
