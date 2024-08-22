@@ -91,7 +91,8 @@ class TicketsController extends Controller
     {
         $teams = DB::select('SELECT g.id,t.team_name FROM games g LEFT OUTER JOIN game_times gtimes ON g.id = gtimes.game_id LEFT OUTER JOIN game_team gteam ON g.id = gteam.game_id LEFT OUTER JOIN teams t ON gteam.team_id = t.id LEFT OUTER JOIN tournament tou ON t.tournament_id = tou.id WHERE tou.id = 1');
         $orders = DB::select('SELECT DISTINCT b.order_number, tic.game_id, gtimes.actual_end_time,sn.name AS seat_number_name, sa.name AS seat_area_name, e.enter_time,e.exit_time FROM buyers b LEFT OUTER JOIN tickets tic ON b.ticket_id = tic.id LEFT OUTER JOIN games g ON tic.game_id = g.id LEFT OUTER JOIN game_times gtimes ON g.id = gtimes.game_id LEFT OUTER JOIN game_team gteam ON g.id = gteam.game_id LEFT OUTER JOIN teams t ON gteam.team_id = t.id LEFT OUTER JOIN tournament tou ON t.tournament_id = tou.id LEFT OUTER JOIN seat_number sn ON tic.seat_number_id = sn.id LEFT OUTER JOIN seat_areas sa ON sn.seat_area_id = sa.id LEFT OUTER JOIN enters e ON e.buyer_id = b.id WHERE b.order_number ='.$order_number);
-        return view('tickets.showCode', compact('orders','teams'));
+        $next = DB::select('SELECT DISTINCT b.order_number, g.date, tic.game_id, gtimes.actual_end_time,sn.id AS seat_number_id, sa.id AS seat_area_id, e.enter_time, e.exit_time FROM buyers b LEFT OUTER JOIN tickets tic ON b.ticket_id = tic.id LEFT OUTER JOIN games g ON tic.game_id = g.id LEFT OUTER JOIN game_times gtimes ON g.id = gtimes.game_id LEFT OUTER JOIN game_team gteam ON g.id = gteam.game_id LEFT OUTER JOIN teams t ON gteam.team_id = t.id LEFT OUTER JOIN tournament tou ON t.tournament_id = tou.id LEFT OUTER JOIN seat_number sn ON tic.seat_number_id = sn.id LEFT OUTER JOIN seat_areas sa ON sn.seat_area_id = sa.id LEFT OUTER JOIN enters e ON e.buyer_id = b.id');
+        return view('tickets.showCode', compact('orders','teams','next'));
     }
     /**
      * Show the form for editing the specified resource.
@@ -100,7 +101,8 @@ class TicketsController extends Controller
     {
         $teams = DB::select('SELECT g.id,t.team_name FROM games g LEFT OUTER JOIN game_times gtimes ON g.id = gtimes.game_id LEFT OUTER JOIN game_team gteam ON g.id = gteam.game_id LEFT OUTER JOIN teams t ON gteam.team_id = t.id LEFT OUTER JOIN tournament tou ON t.tournament_id = tou.id WHERE tou.id = 1');
         $orders = DB::select('SELECT DISTINCT b.order_number, tic.game_id, gtimes.actual_end_time,sn.name AS seat_number_name, sa.name AS seat_area_name FROM buyers b LEFT OUTER JOIN tickets tic ON b.ticket_id = tic.id LEFT OUTER JOIN games g ON tic.game_id = g.id LEFT OUTER JOIN game_times gtimes ON g.id = gtimes.game_id LEFT OUTER JOIN game_team gteam ON g.id = gteam.game_id LEFT OUTER JOIN teams t ON gteam.team_id = t.id LEFT OUTER JOIN tournament tou ON t.tournament_id = tou.id LEFT OUTER JOIN seat_number sn ON tic.seat_number_id = sn.id LEFT OUTER JOIN seat_areas sa ON sn.seat_area_id = sa.id WHERE b.user_id = '.$user_id);
-        return view('tickets.showCode', compact('orders','teams'));
+        $next = DB::select('SELECT DISTINCT b.order_number, g.date, tic.game_id, gtimes.actual_end_time,sn.id AS seat_number_id, sa.id AS seat_area_id, e.enter_time, e.exit_time FROM buyers b LEFT OUTER JOIN tickets tic ON b.ticket_id = tic.id LEFT OUTER JOIN games g ON tic.game_id = g.id LEFT OUTER JOIN game_times gtimes ON g.id = gtimes.game_id LEFT OUTER JOIN game_team gteam ON g.id = gteam.game_id LEFT OUTER JOIN teams t ON gteam.team_id = t.id LEFT OUTER JOIN tournament tou ON t.tournament_id = tou.id LEFT OUTER JOIN seat_number sn ON tic.seat_number_id = sn.id LEFT OUTER JOIN seat_areas sa ON sn.seat_area_id = sa.id LEFT OUTER JOIN enters e ON e.buyer_id = b.id');
+        return view('tickets.showCode', compact('orders','teams','next'));
     }
 
     /**

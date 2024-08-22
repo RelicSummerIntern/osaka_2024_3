@@ -72,11 +72,12 @@
                     $icon = "◎";
                 };
                 @endphp
+
                 <p class="game-status">{{ $icon }}</p>
             </a>
-
         @endforeach
         </div>
+        <button class="next-day-button">翌日へ</button>
         <div class="purchase-options">
         @foreach($games as $game)
         <div class="purchase-card">
@@ -133,9 +134,9 @@
         </div>
         @endforeach
 
-        <button class="next-day-button">翌日へ</button>
 
     </div>
+
 
     <div class="customer-info">
         <h1 class="customer-info-title">お客様へのご案内</h1>
@@ -143,3 +144,4 @@
         <p class="customer-info-text">試合終了後30分間は無料でお過ごしいただけます。30分を超過した場合、10分ごとに100円の延長料金が発生いたします。</p>
         <p class="customer-info-text">お時間に余裕を持ってのご退場にご協力いただけますと幸いです。ご理解とご協力をお願い申し上げます。</p>
     </div>
+@endsection

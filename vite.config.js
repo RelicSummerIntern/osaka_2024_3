@@ -17,7 +17,6 @@ export default defineConfig({
                 'resources/css/header.css',
                 'resources/seat-select.css',
                 'resources/css/seat-select.css',
-
                 'resources/fotter.css',
                 'resources/js/exit.js'
 
