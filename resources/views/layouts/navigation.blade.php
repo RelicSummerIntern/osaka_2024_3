@@ -64,9 +64,7 @@
                     <x-nav-link :href="route('register')" :active="request()->routeIs('register')" class="text-decoration-none">
                         contact
                     </x-nav-link>
-                    <x-nav-link :href="route('register')" :active="request()->routeIs('register')" class="text-decoration-none">
-                        {{ __('Register') }}
-                    </x-nav-link>
+    
 
                 <x-nav-link :href="route('register')" :active="request()->routeIs('register')" class="text-decoration-none">
                     {{ __('Register') }}
