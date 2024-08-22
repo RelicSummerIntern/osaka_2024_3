@@ -4,69 +4,58 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Payments;
+use Illuminate\Support\Facades\DB;
+use DateTime;
 
 class PaymentsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function store($order_number)
     {
-        //
-    }
+        $data = DB::select('
+            SELECT DISTINCT b.order_number, g.date, tic.game_id, gtimes.actual_end_time, sn.id AS seat_number_id, sa.id AS seat_area_id, e.enter_time, e.exit_time, b.id AS buyer_id, sa.price
+            FROM buyers b
+            LEFT OUTER JOIN tickets tic ON b.ticket_id = tic.id
+            LEFT OUTER JOIN games g ON tic.game_id = g.id
+            LEFT OUTER JOIN game_times gtimes ON g.id = gtimes.game_id
+            LEFT OUTER JOIN game_team gteam ON g.id = gteam.game_id
+            LEFT OUTER JOIN teams t ON gteam.team_id = t.id
+            LEFT OUTER JOIN tournament tou ON t.tournament_id = tou.id
+            LEFT OUTER JOIN seat_number sn ON tic.seat_number_id = sn.id
+            LEFT OUTER JOIN seat_areas sa ON sn.seat_area_id = sa.id
+            LEFT OUTER JOIN enters e ON e.buyer_id = b.id
+            WHERE b.order_number = '.$order_number);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+        if (empty($data)) {
+            return redirect()->route('/')->with('error', 'No data found for the given order number.');
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
+        $exists = Payments::where('buyer_id', $data[0]->buyer_id)->exists();
+
+        if ($exists) {
+            $data = DB::select('SELECT * FROM payments WHERE buyer_id = '.$data[0]->buyer_id);
+            return redirect()->route('payments.show')->with('price', $data[0]->payment);
+        }
+
+        $actualEndTime = new DateTime($data[0]->actual_end_time);
+        $exitTime = $data[0]->exit_time ? new DateTime($data[0]->exit_time) : $actualEndTime;
+
+        $interval = $actualEndTime->diff($exitTime);
+        $minutes = $interval->days * 24 * 60 + $interval->h * 60 + $interval->i;
+        $price = $minutes / 10 * 100 + $data[0]->price;
+
         $payment = new Payments;
-        $payment->buyer_id = $request->buyer_id;
-        $payment->payment = $request->payment;
-
+        $payment->buyer_id = $data[0]->buyer_id;
+        $payment->payment = $price;
         $payment->save();
 
-
-        return redirect('/');
+        return redirect()->route('payments.show')->with('price', $price);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show()
     {
-        //
+        $price = session('price');
+        // 支払いの一覧を表示する処理を追加
+        return view('tickets.payments', compact('price'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
