@@ -81,7 +81,7 @@ Route::get('/admin/update/{buyer_id}', [EnterController::class, 'update'])->midd
 
 Route::middleware('auth')->group(function () {
     Route::get('/payments/store/{order_number}', [PaymentsController::class, 'store'])->name('payments.store');
-    Route::get('/payments/show', [PaymentsController::class, 'show'])->name('payments.show');
+    Route::get('/payments/show/{buyer_id}', [PaymentsController::class, 'show'])->name('payments.show');
 });
 
 Route::group(['prefix' => 'gameTimes', 'as' => 'gameTimes.'], function () {
