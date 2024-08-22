@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                        <img class="company-logo" src="image/942c086a-1281-42b3-b609-36c7c5a88f68.jpg"/>
                     </a>
                 </div>
 
@@ -50,10 +50,12 @@
                 @else
     
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <p class="text-decoration-none_1">チケット購入</p>
-                    <p class="text-decoration-none_1">マイチケット</p>
-                    <p class="text-decoration-none_1">contact</p>
-
+                    <x-nav-link :href="route('register')" :active="request()->routeIs('register')" class="text-decoration-none">
+                        チケット購入
+                    </x-nav-link>
+                    <x-nav-link :href="route('register')" :active="request()->routeIs('register')" class="text-decoration-none">
+                        contact
+                    </x-nav-link>
                     <x-nav-link :href="route('register')" :active="request()->routeIs('register')" class="text-decoration-none">
                         {{ __('Register') }}
                     </x-nav-link>

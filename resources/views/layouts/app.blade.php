@@ -14,7 +14,7 @@
         <!-- Scripts -->
 
 
-        @vite(['resources/css/app.css','resources/sass/purchased.scss','resources/sass/ticket.scss','resources/sass/exit.scss','resources/sass/app.scss', 'resources/js/app.js','resources/css/home.css', 'resources/css/credit.css', 'resources/css/fotter.css', 'resources/seat-select.css'])
+        @vite(['resources/css/app.css','resources/sass/purchased.scss','resources/sass/ticket.scss','resources/sass/exit.scss','resources/sass/app.scss', 'resources/js/app.js','resources/css/home.css', 'resources/css/credit.css', 'resources/css/fotter.css', 'resources/css/seat-select.css', 'resources/css/header.css'])
 
 
 
