@@ -12,7 +12,7 @@
         <p>{{$ticket->seat_name}}</p>
         <p>枚数を選択してください</p>
         
-        <form action="{{ route('tickets.store', ['ticket_id' => $ticket->ticket_id]) }}" method="POST">
+        <form action="{{ route('tickets.store', ['ticket_id' => $ticket->ticket_id]) }}" >
             @csrf
             <div class="adult-side">
                 <label for="adult-ticket-number">

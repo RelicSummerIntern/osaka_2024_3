@@ -209,8 +209,8 @@ body {
     font-size: 14px;
 }
 
-.purchase-button:hover {
-    background-color: #388e3c;
+.purchase-button:hover { background-color: #388e3c;
+   
 }
 
 /* Customer info section */
