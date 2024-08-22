@@ -4,8 +4,9 @@
 
 @section('content')
 
-<link rel="stylesheet" href="./resources/sass/purchased.scss">
-    <h1>チケットの購入が<br>完了しました</h1>
+    @if (session('status'))
+        <h1>{{ session('status') }}</h1>
+    @endif
     @foreach($orders as $order)
     @php
     $btw = "vs";
@@ -32,6 +33,6 @@
     <p>入退場する際は上記のQRコードを読み取りしてください</p>
     @endforeach
 
-    <button class="button">TOPへ</button>
+    <button class="button" onclick="window.location.href='/'">TOPへ</button>
 
 @endsection

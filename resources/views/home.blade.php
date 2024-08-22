@@ -76,9 +76,11 @@
 
             </div>
 
+        @endforeach
         @foreach($games as $game)
         <div>
-            <p>
+            <img src="image/dome-890x500.jpg" alt="Game1" class="purchase-image"/>
+            <p class="purchase-title">
                 <?php $btw = "vs"; ?>
                 @foreach($teams as $team)
                 @if($game->id == $team->id)
@@ -140,4 +142,3 @@
         <p class="customer-info-text">試合終了後30分間は無料でお過ごしいただけます。30分を超過した場合、10分ごとに100円の延長料金が発生いたします。</p>
         <p class="customer-info-text">お時間に余裕を持ってのご退場にご協力いただけますと幸いです。ご理解とご協力をお願い申し上げます。</p>
     </div>
-@endsection
