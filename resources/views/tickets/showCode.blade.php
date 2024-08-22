@@ -24,6 +24,11 @@
 <!--(URL)の部分を変更するとそのQRコードができる-->
         <img class="QRimg" src="https://api.qrserver.com/v1/create-qr-code/?data={{$order->order_number}}" alt="QRcode">
     </div>
+    <input type="hidden" value="{{$order->actual_end_time}}" id="end_time">
+    <p>{{$order->actual_end_time}}</p>
+    <div id="container">
+      <div id="time">00:00:00.000</div>
+    </div>
     <p>入場する際は上記のQRコードを読み取りしてください</p>
     @endforeach
 
