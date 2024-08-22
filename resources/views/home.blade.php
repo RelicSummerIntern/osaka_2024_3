@@ -76,9 +76,11 @@
 
             </div>
 
+        @endforeach
         @foreach($games as $game)
-        <div>
-            <p>
+        <div class="purchase-options">
+            <img src="image/dome-890x500.jpg" alt="Game1" class="purchase-image"/>
+            <p class="purchase-title">
                 <?php $btw = "vs"; ?>
                 @foreach($teams as $team)
                 @if($game->id == $team->id)

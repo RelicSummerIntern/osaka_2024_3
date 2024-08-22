@@ -83,7 +83,7 @@ class TicketsController extends Controller
             $enter->save();
         }
 
-        return redirect('tickets/code/'.$order_number);
+        return redirect('tickets/code/'.$order_number)->with('status', 'チケットの購入が完了しました');
     }
 
     # QRコードを表示
