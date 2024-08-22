@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <img class="company-logo" src="image/942c086a-1281-42b3-b609-36c7c5a88f68.jpg"/>
+                        <img class="company-logo" src="{{ asset('image/942c086a-1281-42b3-b609-36c7c5a88f68.jpg') }}" />
                     </a>
                 </div>
 
@@ -67,7 +67,7 @@
                 </x-dropdown>
                 @else
 
-    
+
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('register')" :active="request()->routeIs('register')" class="text-decoration-none">
                         チケット購入
@@ -75,7 +75,7 @@
                     <x-nav-link :href="route('register')" :active="request()->routeIs('register')" class="text-decoration-none">
                         contact
                     </x-nav-link>
-    
+
 
                 <x-nav-link :href="route('register')" :active="request()->routeIs('register')" class="text-decoration-none">
                     {{ __('Register') }}

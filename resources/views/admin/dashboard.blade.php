@@ -48,10 +48,10 @@
                 <form action="{{ route('gameTimes.update',['id'=>$game->id])}}">
                 <td>{{ $game -> id }}</td>
                 <td>
-                    <input type="time" name="actual_start_time" value="{{date('H:i', strtotime($game->actual_start_time))}}">
+                    <input type="time" name="actual_start_time" value="{{ $game->actual_start_time ? date('H:i', strtotime($game->actual_start_time)) : '' }}">
                 </td>
                 <td>
-                    <input type="time" name="actual_end_time" value="{{date('H:i', strtotime($game->actual_end_time))}}">
+                    <input type="time" name="actual_end_time" value="{{ $game->actual_end_time ? date('H:i', strtotime($game->actual_end_time)) : '' }}">
                 </td>
                 <td><button type="submit">登録</button></td>
                 </form>
@@ -71,8 +71,8 @@
             <tr>
                     <td>{{ $buyer->id }}</td>
                     <td>{{ $buyer->order_number }}</td>
-                    <td><input type="time" name="enter_time" value="{{date('H:i', strtotime($buyer->enter_time))}}"></td>
-                    <td><input type="time" name="exit_time" value="{{date('H:i', strtotime($buyer->exit_time))}}"></td>
+                    <td><input type="time" name="enter_time" value="{{ $buyer->enter_time ? date('H:i', strtotime($buyer->enter_time)) : '' }}"></td>
+                    <td><input type="time" name="exit_time" value="{{ $buyer->exit_time ? date('H:i', strtotime($buyer->exit_time)) : '' }}"></td>
                     <td><button type="submit">登録</button></td>
             </tr>
             </form>
