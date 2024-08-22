@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Payments;
 use Illuminate\Support\Facades\DB;
 use DateTime;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentsController extends Controller
 {
@@ -33,7 +34,7 @@ class PaymentsController extends Controller
 
         if ($exists) {
             $data = DB::select('SELECT * FROM payments WHERE buyer_id = '.$data[0]->buyer_id);
-            return redirect()->route('payments.show')->with('price', $data[0]->payment);
+            return redirect()->route('payments.show',['buyer_id'=>$data[0]->buyer_id]);
         }
 
         $actualEndTime = new DateTime($data[0]->actual_end_time);
@@ -48,14 +49,26 @@ class PaymentsController extends Controller
         $payment->payment = $price;
         $payment->save();
 
-        return redirect()->route('payments.show')->with('price', $price);
+        return redirect()->route('payments.show',['buyer_id'=>$data[0]->buyer_id]);
     }
 
-    public function show()
+    public function show($buyer_id)
     {
-        $price = session('price');
+        $data = DB::select('
+            SELECT p.payment
+            FROM buyers b
+            LEFT OUTER JOIN tickets tic ON b.ticket_id = tic.id
+            LEFT OUTER JOIN games g ON tic.game_id = g.id
+            LEFT OUTER JOIN game_times gtimes ON g.id = gtimes.game_id
+            LEFT OUTER JOIN game_team gteam ON g.id = gteam.game_id
+            LEFT OUTER JOIN teams t ON gteam.team_id = t.id
+            LEFT OUTER JOIN tournament tou ON t.tournament_id = tou.id
+            LEFT OUTER JOIN seat_number sn ON tic.seat_number_id = sn.id
+            LEFT OUTER JOIN seat_areas sa ON sn.seat_area_id = sa.id
+            LEFT OUTER JOIN enters e ON e.buyer_id = b.id
+            LEFT OUTER JOIN payments p ON p.buyer_id = b.id WHERE p.buyer_id = '.$buyer_id.' AND b.user_id = '.Auth::user()->id);
         // 支払いの一覧を表示する処理を追加
-        return view('tickets.payments', compact('price'));
+        return view('tickets.payments', compact('data'));
     }
 
 }
