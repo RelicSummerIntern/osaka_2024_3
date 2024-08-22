@@ -1,28 +1,33 @@
-const time = document.getElementById('time');
-const startButton = document.getElementById('start');
-const stopButton = document.getElementById('stop');
-const resetButton = document.getElementById('reset');
+document.addEventListener('DOMContentLoaded', function() {
+    const timeDisplay = document.getElementById('time');
+    const startTimeStr = '12:04:00'; // スタート時間の設定 (例: '12:04:00')
 
-// 開始時間
-let startTime;
-// 停止時間
-let stopTime = 0;
-// タイムアウトID
-let timeoutID;
+    // 時間を表示する関数
+    function displayTime() {
+        const now = new Date();
+        const startTime = new Date();
+        const [hours, minutes, seconds] = startTimeStr.split(':').map(Number);
 
-// 時間を表示する関数
-function displayTime() {
-  const currentTime = new Date(Date.now() - startTime + stopTime);
-  const h = String(currentTime.getHours()-1).padStart(2, '0');
-  const m = String(currentTime.getMinutes()).padStart(2, '0');
-  const s = String(currentTime.getSeconds()).padStart(2, '0');
-  const ms = String(currentTime.getMilliseconds()).padStart(3, '0');
+        // スタート時間を現在の日付に設定
+        startTime.setHours(hours);
+        startTime.setMinutes(minutes);
+        startTime.setSeconds(seconds);
+        startTime.setMilliseconds(0);
 
-  time.textContent = `${h}:${m}:${s}.${ms}`;
-  timeoutID = setTimeout(displayTime, 10);
-}
+        const elapsed = now - startTime; // 経過時間（ミリ秒）
+        const h = String(Math.floor(elapsed / 3600000)).padStart(2, '0');
+        const m = String(Math.floor((elapsed % 3600000) / 60000)).padStart(2, '0');
+        const s = String(Math.floor((elapsed % 60000) / 1000)).padStart(2, '0');
 
-// スタートボタンがクリックされたら時間を進める
+        timeDisplay.textContent = `${h}:${m}:${s}`;
+
+        setTimeout(displayTime, 1000); // 1秒ごとに更新
+    }
+
+    displayTime();
+});
+
+/* // スタートボタンがクリックされたら時間を進める
 startButton.addEventListener('click', () => {
   startButton.disabled = true;
   stopButton.disabled = false;
@@ -48,3 +53,4 @@ resetButton.addEventListener('click', function() {
   time.textContent = '00:00:00.000';
   stopTime = 0;
 });
+ */
