@@ -57,3 +57,14 @@
 .seat-details {
     margin-top: 1rem; /* 上にマージンを追加 */
 }
+.detail-line a {
+    color: rgb(37, 94, 35) !important;
+    text-decoration: none;
+    font-weight:bold; 
+}
+
+.detail-line a:hover {
+    color: rgb(0, 141, 33) !important;
+    text-decoration: none;
+    font-weight:bold; 
+}

@@ -13,7 +13,7 @@
             @foreach($seats as $seat)
             <div class="detail-line">
                 @if(empty($seat->buyer_id))
-                <p ><a href="{{ route('tickets.create',['seat_number_id'=>$seat->seat_id,'game_id'=>$seat->id])}}">{{$seat->seat_name}}:〇</a></p>
+                <p class="seat-link"><a href="{{ route('tickets.create',['seat_number_id'=>$seat->seat_id,'game_id'=>$seat->id])}}">{{$seat->seat_name}}:〇</a></p>
                 @else
                 <p>{{$seat->seat_name}}:×</p>
                 @endif
