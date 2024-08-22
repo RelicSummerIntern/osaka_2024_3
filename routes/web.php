@@ -26,7 +26,7 @@ Route::get('/credit-info', function () {
     return view('credit-info');
 })->name('credit-info');
 
-Route::group(['prefix' => 'tickets', 'as' => 'tickets.'], function () {
+Route::group(['middleware' => ['auth'],'prefix' => 'tickets', 'as' => 'tickets.'], function () {
     Route::get('show/{id}', [TicketsController::class, 'show'])->name('show');
     Route::get('create/{game_id}/{seat_number_id}', [TicketsController::class, 'create'])->name('create');
     Route::get('store/{ticket_id}', [TicketsController::class, 'store'])->name('store');

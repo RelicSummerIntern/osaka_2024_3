@@ -41,10 +41,17 @@ class TicketsController extends Controller
      */
 
     #枚数選択ページ用
-    public function create($seat_number_id,$game_id)
+    public function create($game_id,$seat_number_id,)
     {
-        $tickets = DB::select('SELECT DISTINCT g.id, g.date, g.scheduled_start_time,g.scheduled_end_time, tou.tournament_name, sn.name AS seat_number,sa.name AS seat_name, sa.price, tic.id AS ticket_id, b.id AS buyer_id FROM tickets tic LEFT OUTER JOIN games g ON tic.game_id = g.id LEFT OUTER JOIN game_times gtimes ON g.id = gtimes.game_id LEFT OUTER JOIN game_team gteam ON g.id = gteam.game_id LEFT OUTER JOIN teams t ON gteam.team_id = t.id LEFT OUTER JOIN tournament tou ON t.tournament_id = tou.id LEFT OUTER JOIN seat_number sn ON tic.seat_number_id = sn.id LEFT OUTER JOIN seat_areas sa ON sn.seat_area_id = sa.id LEFT OUTER JOIN buyers b ON tic.id = b.ticket_id WHERE g.id = '.$game_id.' AND sa.id = '.$seat_number_id);
-        return view('tickets.number', compact('tickets'));
+        $buyers = DB::select('SELECT * FROM buyers b LEFT OUTER JOIN tickets tic ON b.ticket_id = tic.id LEFT OUTER JOIN games g ON tic.game_id = g.id LEFT OUTER JOIN seat_number sn ON tic.seat_number_id = sn.id LEFT OUTER JOIN seat_areas sa ON sn.seat_area_id = sa.id WHERE g.id = '.$game_id.' AND sa.id = '.$seat_number_id);
+
+        if(empty($buyers)){
+            $tickets = DB::select('SELECT DISTINCT g.id, g.date, g.scheduled_start_time,g.scheduled_end_time, tou.tournament_name, sn.name AS seat_number,sa.name AS seat_name, sa.price, tic.id AS ticket_id FROM tickets tic LEFT OUTER JOIN games g ON tic.game_id = g.id LEFT OUTER JOIN game_times gtimes ON g.id = gtimes.game_id LEFT OUTER JOIN game_team gteam ON g.id = gteam.game_id LEFT OUTER JOIN teams t ON gteam.team_id = t.id LEFT OUTER JOIN tournament tou ON t.tournament_id = tou.id LEFT OUTER JOIN seat_number sn ON tic.seat_number_id = sn.id LEFT OUTER JOIN seat_areas sa ON sn.seat_area_id = sa.id  WHERE g.id = '.$game_id.' AND sa.id = '.$seat_number_id);
+            return view('tickets.number', compact('tickets'));
+        }else{
+            return redirect('tickets/show/'.$game_id);
+        }
+
     }
 
     /**
@@ -54,6 +61,12 @@ class TicketsController extends Controller
     # 枚数選択後データ保存
     public function store(Request $request,$ticket_id)
     {
+
+        $exists = Buyers::where('ticket_id', $ticket_id)->exists();
+
+        if($exists){
+            return redirect('/')->with('error', 'チケットは既に購入されています');;
+        }
         for($i = 0; $i < $request->adult; $i++){
             $order_number = mt_rand(1000000, 9999999);
             $buyer = new Buyers;
