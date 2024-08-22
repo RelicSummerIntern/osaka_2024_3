@@ -5,11 +5,7 @@
         <div class="image-box">
             <img src="image/img_24fc77a70077388fffb1304d6f511763255381.jpg" alt="top" class="image-item"/>
         </div>
-        @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-        @endif
+
         <div class="info-box">
             <h1 class="info-title">見たい試合を見ることが出来る</h1>
             <p class="info-description">relicketで簡単購入</p>
@@ -77,27 +73,17 @@
                 };
                 @endphp
                 <p class="game-status"><a href="{{ route( 'tickets.show',['id'=>$game->id] )}}">{{ $icon }}</a></p>
+
             </div>
-            @endforeach
 
-        <button class="next-day-button">翌日へ</button>
-
-    </div>
-
-    <div class="purchase-options">
         @foreach($games as $game)
-        <div class="purchase-card">
-            <img src="image/dome-890x500.jpg" alt="Game1" class="purchase-image"/>
-            <p class="purchase-title">
-                @php
-                $btw = "vs";
-                @endphp
+        <div>
+            <p>
+                <?php $btw = "vs"; ?>
                 @foreach($teams as $team)
                 @if($game->id == $team->id)
                 {{$team->team_name . $btw}}
-                @php
-                $btw = "";
-                @endphp
+                <?php $btw = ""; ?>
                 @endif
                 @endforeach
             </p>
@@ -140,12 +126,14 @@
 
             <p class="purchase-status">{{ $icon }}</p>
             <button class="purchase-button" onclick="window.location.href='{{ route( 'tickets.show',['id'=>$game->id] )}}'">購入する</button>
+
         </div>
         @endforeach
 
         <button class="next-day-button">翌日へ</button>
 
     </div>
+
     <div class="customer-info">
         <h1 class="customer-info-title">お客様へのご案内</h1>
         <p class="customer-info-text">試合終了後、スムーズな会場運営にご協力をお願いいたします。退出に関する重要事項は以下の通りです<div class=""></div></p>
