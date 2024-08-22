@@ -11,7 +11,8 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/css/home.css',
                 'resources/css/credit.css',
-                'seat-select.css'
+                'resources/seat-select.css',
+                'resources/fotter.css'
             ],
             refresh: true,
         }),
