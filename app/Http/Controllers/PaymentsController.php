@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 class PaymentsController extends Controller
 {
+    const free_time = 30;
+
     public function store($order_number)
     {
         $data = DB::select('
@@ -42,7 +44,8 @@ class PaymentsController extends Controller
 
         $interval = $actualEndTime->diff($exitTime);
         $minutes = $interval->days * 24 * 60 + $interval->h * 60 + $interval->i;
-        $price = $minutes / 10 * 100 + $data[0]->price;
+        $minutes = floor($minutes / 10) * 10;
+        $price = ($minutes - self::free_time) / 10 * 100 + $data[0]->price;
 
         $payment = new Payments;
         $payment->buyer_id = $data[0]->buyer_id;
