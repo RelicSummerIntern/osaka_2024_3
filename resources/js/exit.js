@@ -1,3 +1,5 @@
+
+        // ページが読み込まれた時に実行
 document.addEventListener('DOMContentLoaded', function() {
     const timeDisplay = document.getElementById('time');
     const startTimeStr = '12:04:00'; // スタート時間の設定 (例: '12:04:00')

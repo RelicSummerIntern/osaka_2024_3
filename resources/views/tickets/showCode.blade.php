@@ -29,7 +29,7 @@
     <div id="container">
       <div id="time">00:00:00.000</div>
     </div>
-    <p>入場する際は上記のQRコードを読み取りしてください</p>
+    <p>入退場する際は上記のQRコードを読み取りしてください</p>
     @endforeach
 
     <button class="button">TOPへ</button>
