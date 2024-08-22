@@ -1,16 +1,59 @@
-.seat-link {
-    display: block;
-    padding: 10px;
-    margin-bottom: 5px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f0f0f0;
-    text-decoration: none; /* 下線を消す */
-    color: #333; /* 文字色 */
-    font-weight: bold;
-    transition: background-color 0.3s;
+/* 全体のレイアウト */
+.layout-section {
+    display: flex;
+    align-items: flex-start; /* 上揃え */
+    width: 100%; /* コンテナを100%幅に設定 */
 }
 
-.seat-link:hover {
-    background-color: #e0e0e0; /* ホバー時の背景色 */
+/* 画像のラッパー */
+.image-wrapper {
+    flex: 1; /* 画像のラッパーが1:1の比率を占める */
+    display: flex;
+    justify-content: center; /* 画像を中央に配置 */
+    align-items: center; /* 画像を中央に配置 */
+}
+
+/* 画像のスタイル */
+.seat-select-img {
+    width: 100%; /* 画像が親要素の幅に合わせる */
+    height: auto; /* 高さは自動で調整 */
+}
+
+/* 詳細情報のラッパー */
+.details-wrapper {
+    flex: 1; /* 詳細情報のラッパーが1:1の比率を占める */
+    margin-left: 1rem; /* 左にマージンを追加してスペースを確保 */
+}
+
+/* 各詳細行のスタイル */
+.detail-line {
+    margin: auto;
+    width: 50%;
+    border-radius: 5px;
+    border: 1px solid #b6b6b6; /* 枠線の色と幅を設定 */
+    margin-bottom: 0.5rem; /* 各行の間にスペースを追加 */
+    padding: 0.5rem; /* 内部にパディングを追加 */
+    background-color: #f9f9f9; /* 背景色を設定 */
+}
+
+/* テキストのスタイル */
+.detail-line-p {
+    text-decoration: none;
+    margin-left:  0; /* パラグラフのマージンを取り除く */
+    color: #000; /* 文字色を黒に設定 */
+}
+
+/* マッチ詳細のスタイル */
+.match-details p {
+    font-size: 1.2rem; /* フォントサイズを調整 */
+    font-weight: bold; /* 太字にする */
+}
+
+.match-details h1 {
+    font-size: 1.5rem; /* フォントサイズを調整 */
+}
+
+/* 座席詳細のスタイル */
+.seat-details {
+    margin-top: 1rem; /* 上にマージンを追加 */
 }
