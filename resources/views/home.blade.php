@@ -5,7 +5,11 @@
         <div class="image-box">
             <img src="image/img_24fc77a70077388fffb1304d6f511763255381.jpg" alt="top" class="image-item"/>
         </div>
-
+        @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+        @endif
         <div class="info-box">
             <h1 class="info-title">見たい試合を見ることが出来る</h1>
             <p class="info-description">relicketで簡単購入</p>
@@ -21,6 +25,7 @@
 
         <div class="games-items">
             <!-- 動的に試合情報を表示 -->
+
             <div onclick="window.location.href='{{ route('seat-select') }}'" class="game-item">
                 <p class="game-title" >A高校 VS B高校</p>
                 <p class="game-status">◎</p>
@@ -32,16 +37,80 @@
             <div onclick="window.location.href='{{ route('seat-select') }}'" class="game-item">
                 <p class="game-title">E高校 VS F高校</p>
                 <p class="game-status">△</p>
-            </div>
 
+            @foreach($games as $game)
+            <div class="game-item">
+                <p class="game-title">
+                    @php
+                    $btw = "vs";
+                    @endphp
+                    @foreach($teams as $team)
+                    @if($game->id == $team->id)
+                    {{$team->team_name . $btw}}
+                    @php
+                    $btw = "";
+                    @endphp
+                    @endif
+                    @endforeach
+                </p>
+                @php
+                    $sold_count = 0;
+                    $selling_count = 0;
+                @endphp
+                @foreach($sold as $row)
+                @if($game->id == $row->id)
+                    @php
+                    if(empty($row->sold_num)){
+                        $sold_count = 0;
+                    }else{
+                        $sold_count = $row->sold_num;
+                    }
+                    @endphp
+                @endif
+                @endforeach
+                @foreach($selling as $row)
+                @if($game->id == $row->id)
+                    @php
+                    $selling_count = $row->selling_num;
+                    @endphp
+                @endif
+                @endforeach
+                @php
+                if ($sold_count > 0 && $selling_count > 0) {
+                    $count = $sold_count / $selling_count;
+                } else {
+                    $count = 0; // $selling_count が 0 の場合の処理
+                }
+                if($count > 1){
+                    $icon = "×";
+                }elseif ($count > 0.6) {
+                    $icon = "△";
+                }else{
+                    $icon = "◎";
+                };
+                @endphp
+                <p class="game-status"><a href="{{ route( 'tickets.show',['id'=>$game->id] )}}">{{ $icon }}</a></p>
+            </div>
+            @endforeach
+
+        <button class="next-day-button">翌日へ</button>
+
+    </div>
+
+    <div class="purchase-options">
         @foreach($games as $game)
-        <div>
-            <p>
-                <?php $btw = "vs"; ?>
+        <div class="purchase-card">
+            <img src="image/dome-890x500.jpg" alt="Game1" class="purchase-image"/>
+            <p class="purchase-title">
+                @php
+                $btw = "vs";
+                @endphp
                 @foreach($teams as $team)
                 @if($game->id == $team->id)
                 {{$team->team_name . $btw}}
-                <?php $btw = ""; ?>
+                @php
+                $btw = "";
+                @endphp
                 @endif
                 @endforeach
             </p>
@@ -81,6 +150,7 @@
                 $icon = "×";
             };
             @endphp
+
             <p><a href="{{ route( 'tickets.show',['id'=>$game->id] )}}">{{ $icon }}</a></p>
         </div>
         @endforeach
@@ -108,7 +178,11 @@
             <p class="purchase-title">E高校 VS F高校</p>
             <p class="purchase-status">×売り切れ</p>
             <button class="purchase-button" onclick="window.location.href='{{ route('seat-select') }}'">購入する</button>
+
+            <p class="purchase-status"><a href="{{ route( 'tickets.show',['id'=>$game->id] )}}">{{ $icon }}</a></p>
+            <button class="purchase-button">購入する</button>
         </div>
+        @endforeach
     </div>
 
     <div class="customer-info">

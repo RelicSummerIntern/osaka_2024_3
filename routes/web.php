@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\GameTimesController;
 use App\Http\Controllers\TicketsController;
+use App\Http\Controllers\EnterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,11 +27,12 @@ Route::get('/credit-info', function () {
     return view('credit-info');
 })->name('credit-info');
 
-Route::group(['prefix' => 'tickets', 'as' => 'tickets.'], function () {
+Route::group(['middleware' => ['auth'],'prefix' => 'tickets', 'as' => 'tickets.'], function () {
     Route::get('show/{id}', [TicketsController::class, 'show'])->name('show');
     Route::get('create/{game_id}/{seat_number_id}', [TicketsController::class, 'create'])->name('create');
     Route::get('store/{ticket_id}', [TicketsController::class, 'store'])->name('store');
     Route::get('code/{order_number}', [TicketsController::class, 'show_code'])->name('show_code');
+    Route::get('counter/{user_id}', [TicketsController::class, 'counter'])->name('counter');
   });
 
 Route::get('/purchased', function () {
@@ -73,6 +75,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
 
     Route::get('/', [AdminLoginController::class, 'dashboard'])->middleware(['auth:admin'])->name('dashboard');
 });
+
+Route::get('/admin/update/{buyer_id}', [EnterController::class, 'update'])->middleware(['auth:admin'])->name('enter.update');
 
 Route::group(['prefix' => 'gameTimes', 'as' => 'gameTimes.'], function () {
     Route::get('update/{id}', [GameTimesController::class, 'update'])->name('update');
