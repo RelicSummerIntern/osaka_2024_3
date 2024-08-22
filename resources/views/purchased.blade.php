@@ -12,6 +12,7 @@
 </div>
     <p>入場する際は上記のQRコードを読み取りしてください</p>
 
+    <form action="">
     <button class="button">TOPへ</button>
-
+    </form>
 @endsection
