@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Tickets;
 use App\Models\Buyers;
+use App\Models\Enters;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -75,6 +76,11 @@ class TicketsController extends Controller
             $buyer->order_number = $order_number;
 
             $buyer->save();
+
+            $enter = new Enters;
+            $enter->buyer_id = $buyer->id;
+
+            $enter->save();
         }
 
         return redirect('tickets/code/'.$order_number);
@@ -83,15 +89,18 @@ class TicketsController extends Controller
     # QRコードを表示
     public function show_code($order_number)
     {
-        $order = DB::select('SELECT b.order_number FROM buyers b LEFT OUTER JOIN tickets tic ON b.ticket_id = tic.id LEFT OUTER JOIN games g ON tic.game_id = g.id LEFT OUTER JOIN game_times gtimes ON g.id = gtimes.game_id LEFT OUTER JOIN game_team gteam ON g.id = gteam.game_id LEFT OUTER JOIN teams t ON gteam.team_id = t.id LEFT OUTER JOIN tournament tou ON t.tournament_id = tou.id LEFT OUTER JOIN seat_number sn ON tic.seat_number_id = sn.id LEFT OUTER JOIN seat_areas sa ON sn.seat_area_id = sa.id WHERE b.order_number ='.$order_number);
-        return view('tickets.showCode', compact('order'));
+        $teams = DB::select('SELECT g.id,t.team_name FROM games g LEFT OUTER JOIN game_times gtimes ON g.id = gtimes.game_id LEFT OUTER JOIN game_team gteam ON g.id = gteam.game_id LEFT OUTER JOIN teams t ON gteam.team_id = t.id LEFT OUTER JOIN tournament tou ON t.tournament_id = tou.id WHERE tou.id = 1');
+        $orders = DB::select('SELECT DISTINCT b.order_number, tic.game_id, gtimes.actual_end_time,sn.name AS seat_number_name, sa.name AS seat_area_name FROM buyers b LEFT OUTER JOIN tickets tic ON b.ticket_id = tic.id LEFT OUTER JOIN games g ON tic.game_id = g.id LEFT OUTER JOIN game_times gtimes ON g.id = gtimes.game_id LEFT OUTER JOIN game_team gteam ON g.id = gteam.game_id LEFT OUTER JOIN teams t ON gteam.team_id = t.id LEFT OUTER JOIN tournament tou ON t.tournament_id = tou.id LEFT OUTER JOIN seat_number sn ON tic.seat_number_id = sn.id LEFT OUTER JOIN seat_areas sa ON sn.seat_area_id = sa.id WHERE b.order_number ='.$order_number);
+        return view('tickets.showCode', compact('orders','teams'));
     }
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function counter($user_id)
     {
-        //
+        $teams = DB::select('SELECT g.id,t.team_name FROM games g LEFT OUTER JOIN game_times gtimes ON g.id = gtimes.game_id LEFT OUTER JOIN game_team gteam ON g.id = gteam.game_id LEFT OUTER JOIN teams t ON gteam.team_id = t.id LEFT OUTER JOIN tournament tou ON t.tournament_id = tou.id WHERE tou.id = 1');
+        $orders = DB::select('SELECT DISTINCT b.order_number, tic.game_id, gtimes.actual_end_time,sn.name AS seat_number_name, sa.name AS seat_area_name FROM buyers b LEFT OUTER JOIN tickets tic ON b.ticket_id = tic.id LEFT OUTER JOIN games g ON tic.game_id = g.id LEFT OUTER JOIN game_times gtimes ON g.id = gtimes.game_id LEFT OUTER JOIN game_team gteam ON g.id = gteam.game_id LEFT OUTER JOIN teams t ON gteam.team_id = t.id LEFT OUTER JOIN tournament tou ON t.tournament_id = tou.id LEFT OUTER JOIN seat_number sn ON tic.seat_number_id = sn.id LEFT OUTER JOIN seat_areas sa ON sn.seat_area_id = sa.id WHERE b.user_id = '.$user_id);
+        return view('tickets.showCode', compact('orders','teams'));
     }
 
     /**

@@ -51,12 +51,32 @@
                     <input type="time" name="actual_start_time" value="{{date('H:i', strtotime($game->actual_start_time))}}">
                 </td>
                 <td>
-                    <input type="time" name="actual_end_time" value="{{date('H:i', strtotime($game->actual_end_time))}}"></td>
+                    <input type="time" name="actual_end_time" value="{{date('H:i', strtotime($game->actual_end_time))}}">
                 </td>
                 <td><button type="submit">登録</button></td>
                 </form>
             </tr>
         @endforeach
+        </table>
+        <table>
+            <tr>
+                <th>ゲームID</th>
+                <th>購入番号</th>
+                <th>入場日時</th>
+                <th>退場日時</th>
+                <th>登録</th>
+            </tr>
+            @foreach($buyers as $buyer)
+            <form action="{{ route('enter.update',['buyer_id'=>$buyer->buyer_id])}}">
+            <tr>
+                    <td>{{ $buyer->id }}</td>
+                    <td>{{ $buyer->order_number }}</td>
+                    <td><input type="time" name="enter_time" value="{{date('H:i', strtotime($buyer->enter_time))}}"></td>
+                    <td><input type="time" name="exit_time" value="{{date('H:i', strtotime($buyer->exit_time))}}"></td>
+                    <td><button type="submit">登録</button></td>
+            </tr>
+            </form>
+            @endforeach
         </table>
 </div>
 @endsection
