@@ -22,5 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(initTicketsSeeder::class);
         $this->call(initAdminSeeder::class);
         $this->call(initWorkerSeeder::class);
+        $this->call(initUserSeeder::class);
+        $this->call(initTicketsGame2Seeder::class);
     }
 }

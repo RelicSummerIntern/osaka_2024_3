@@ -22,7 +22,7 @@
         <div class="games-items">
             <!-- 動的に試合情報を表示 -->
             @foreach($games as $game)
-            <div class="game-item">
+            <a href="{{ route( 'tickets.show',['id'=>$game->id] )}}" class="game-item">
                 <p class="game-title">
                     @php
                     $btw = "vs";
@@ -72,9 +72,8 @@
                     $icon = "◎";
                 };
                 @endphp
-                <p class="game-status"><a href="{{ route( 'tickets.show',['id'=>$game->id] )}}">{{ $icon }}</a></p>
-
-            </div>
+                <p class="game-status">{{ $icon }}</p>
+            </a>
 
         @endforeach
         </div>
