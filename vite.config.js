@@ -18,7 +18,8 @@ export default defineConfig({
                 'resources/seat-select.css',
                 'resources/css/seat-select.css',
                 'resources/fotter.css',
-                'resources/js/exit.js'
+                'resources/js/exit.js',
+                'resources/sass/showCode.scss',
 
             ],
             refresh: true,

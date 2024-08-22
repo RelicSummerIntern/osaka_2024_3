@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\GameTimesController;
 use App\Http\Controllers\TicketsController;
 use App\Http\Controllers\EnterController;
+use App\Http\Controllers\PaymentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,6 +78,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
 });
 
 Route::get('/admin/update/{buyer_id}', [EnterController::class, 'update'])->middleware(['auth:admin'])->name('enter.update');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/payments/store/{order_number}', [PaymentsController::class, 'store'])->name('payments.store');
+    Route::get('/payments/show', [PaymentsController::class, 'show'])->name('payments.show');
+});
 
 Route::group(['prefix' => 'gameTimes', 'as' => 'gameTimes.'], function () {
     Route::get('update/{id}', [GameTimesController::class, 'update'])->name('update');
