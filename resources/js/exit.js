@@ -1,30 +1,34 @@
+
+        // ページが読み込まれた時に実行
 document.addEventListener('DOMContentLoaded', function() {
+    const timeInput = document.getElementById('end_time');
     const timeDisplay = document.getElementById('time');
-    const startTimeStr = '12:04:00'; // スタート時間の設定 (例: '12:04:00')
+    const startTimeStr = timeInput.value; // スタート時間の設定 (例: '12:04:00')
+    if(startTimeStr != "00:00:00"){
+        // 時間を表示する関数
+        function displayTime() {
+            const now = new Date();
+            const startTime = new Date();
+            const [hours, minutes, seconds] = startTimeStr.split(':').map(Number);
 
-    // 時間を表示する関数
-    function displayTime() {
-        const now = new Date();
-        const startTime = new Date();
-        const [hours, minutes, seconds] = startTimeStr.split(':').map(Number);
+            // スタート時間を現在の日付に設定
+            startTime.setHours(hours);
+            startTime.setMinutes(minutes);
+            startTime.setSeconds(seconds);
+            startTime.setMilliseconds(0);
 
-        // スタート時間を現在の日付に設定
-        startTime.setHours(hours);
-        startTime.setMinutes(minutes);
-        startTime.setSeconds(seconds);
-        startTime.setMilliseconds(0);
+            const elapsed = now - startTime; // 経過時間（ミリ秒）
+            const h = String(Math.floor(elapsed / 3600000)).padStart(2, '0');
+            const m = String(Math.floor((elapsed % 3600000) / 60000)).padStart(2, '0');
+            const s = String(Math.floor((elapsed % 60000) / 1000)).padStart(2, '0');
 
-        const elapsed = now - startTime; // 経過時間（ミリ秒）
-        const h = String(Math.floor(elapsed / 3600000)).padStart(2, '0');
-        const m = String(Math.floor((elapsed % 3600000) / 60000)).padStart(2, '0');
-        const s = String(Math.floor((elapsed % 60000) / 1000)).padStart(2, '0');
+            timeDisplay.textContent = `${h}:${m}:${s}`;
 
-        timeDisplay.textContent = `${h}:${m}:${s}`;
+            setTimeout(displayTime, 1000); // 1秒ごとに更新
+        }
 
-        setTimeout(displayTime, 1000); // 1秒ごとに更新
+        displayTime();
     }
-
-    displayTime();
 });
 
 /* // スタートボタンがクリックされたら時間を進める
