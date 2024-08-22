@@ -77,8 +77,10 @@
             </div>
 
         @endforeach
-        @foreach($games as $game)
+        </div>
         <div class="purchase-options">
+        @foreach($games as $game)
+        <div class="purchase-card">
             <img src="image/dome-890x500.jpg" alt="Game1" class="purchase-image"/>
             <p class="purchase-title">
                 <?php $btw = "vs"; ?>
