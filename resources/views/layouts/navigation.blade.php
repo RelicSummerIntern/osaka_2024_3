@@ -18,11 +18,22 @@
                 @auth
 
 
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <p class="text-decoration-none_1"><a href="/">チケット購入</a></p>
-                    <p class="text-decoration-none_1"><a href="{{ route('tickets.counter',['user_id'=>Auth::user()->id])}}">マイチケット</a></p>
-                    <p class="text-decoration-none_1">contact</p>
+               
+                <div class="hidden space-x-2 sm:-my-px sm:ml-10 sm:mr-10 sm:flex sm:justify-between">
+                    <x-nav-link :href="route('register')" :active="request()->routeIs('register')" class="text-decoration-none">
+                    ticket　
+                    </x-nav-link>
+                    <x-nav-link :href="route('register')" :active="request()->routeIs('register')" class="text-decoration-none">
+                    contact
+                    </x-nav-link>
+
+                    <a href="{{ route('tickets.counter',['user_id'=>Auth::user()->id])}}">
+                    <x-nav-link :href="route('register')" :active="request()->routeIs('register')" class="text-decoration-none">
+                    myticket
+                    </x-nav-link>
+                    </a>
                 </div>
+             
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
