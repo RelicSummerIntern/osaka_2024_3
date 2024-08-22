@@ -2,8 +2,6 @@
 
 @section('content')
 
-
-
   <link rel='stylesheet' href='resources/sass/exit.scss'>
 
   <h1>試合が終了しました。<br>退出してください</h1>
