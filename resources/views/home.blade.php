@@ -21,17 +21,59 @@
 
         <div class="games-items">
             <!-- 動的に試合情報を表示 -->
-            <div onclick="window.location.href='{{ route('seat') }}'" class="game-item">
-                <p class="game-title" >A高校 VS B高校</p>
-                <p class="game-status">◎</p>
-            </div>
-            <div onclick="window.location.href='{{ route('seat') }}'" class="game-item">
-                <p class="game-title">C高校 VS D高校</p>
-                <p class="game-status">△</p>
-            </div>
-            <div onclick="window.location.href='{{ route('seat') }}'" class="game-item">
-                <p class="game-title">E高校 VS F高校</p>
-                <p class="game-status">△</p>
+            @foreach($games as $game)
+            <div class="game-item">
+                <p class="game-title">
+                    @php
+                    $btw = "vs";
+                    @endphp
+                    @foreach($teams as $team)
+                    @if($game->id == $team->id)
+                    {{$team->team_name . $btw}}
+                    @php
+                    $btw = "";
+                    @endphp
+                    @endif
+                    @endforeach
+                </p>
+                @php
+                    $sold_count = 0;
+                    $selling_count = 0;
+                @endphp
+                @foreach($sold as $row)
+                @if($game->id == $row->id)
+                    @php
+                    if(empty($row->sold_num)){
+                        $sold_count = 0;
+                    }else{
+                        $sold_count = $row->sold_num;
+                    }
+                    @endphp
+                @endif
+                @endforeach
+                @foreach($selling as $row)
+                @if($game->id == $row->id)
+                    @php
+                    $selling_count = $row->selling_num;
+                    @endphp
+                @endif
+                @endforeach
+                @php
+                if ($sold_count > 0 && $selling_count > 0) {
+                    $count = $sold_count / $selling_count;
+                } else {
+                    $count = 0; // $selling_count が 0 の場合の処理
+                }
+                if($count > 1){
+                    $icon = "×";
+                }elseif ($count > 0.6) {
+                    $icon = "△";
+                }else{
+                    $icon = "◎";
+                };
+                @endphp
+                <p class="game-status"><a href="{{ route( 'tickets.show',['id'=>$game->id] )}}">{{ $icon }}</a></p>
+
             </div>
 
         @foreach($games as $game)
@@ -71,17 +113,20 @@
             if ($sold_count > 0 && $selling_count > 0) {
                 $count = $sold_count / $selling_count;
             } else {
-                $count = 100; // $selling_count が 0 の場合の処理
+                $count = 0; // $selling_count が 0 の場合の処理
             }
-            if($count > 80){
-                $icon = "◎";
-            }elseif ($count > 40) {
+            if($count > 1){
+                $icon = "×";
+            }elseif ($count > 0.6) {
                 $icon = "△";
             }else{
-                $icon = "×";
+                $icon = "◎";
             };
             @endphp
-            <p><a href="{{ route( 'tickets.show',['id'=>$game->id] )}}">{{ $icon }}</a></p>
+
+            <p class="purchase-status">{{ $icon }}</p>
+            <button class="purchase-button" onclick="window.location.href='{{ route( 'tickets.show',['id'=>$game->id] )}}'">購入する</button>
+
         </div>
         @endforeach
 
