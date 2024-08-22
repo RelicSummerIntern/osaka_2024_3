@@ -44,9 +44,9 @@ Route::get('/exit', function () {
 })->name('exit');
 
 
-Route::get('/seat-select', function () {
-    return view('seat-select');
-})->name('seat-select');
+Route::get('/seat', function () {
+    return view('seat');
+})->name('seat');
 
 Route::get('/ticket', function () {
     return view('ticket');

@@ -21,15 +21,15 @@
 
         <div class="games-items">
             <!-- 動的に試合情報を表示 -->
-            <div onclick="window.location.href='{{ route('seat-select') }}'" class="game-item">
+            <div onclick="window.location.href='{{ route('seat') }}'" class="game-item">
                 <p class="game-title" >A高校 VS B高校</p>
                 <p class="game-status">◎</p>
             </div>
-            <div onclick="window.location.href='{{ route('seat-select') }}'" class="game-item">
+            <div onclick="window.location.href='{{ route('seat') }}'" class="game-item">
                 <p class="game-title">C高校 VS D高校</p>
                 <p class="game-status">△</p>
             </div>
-            <div onclick="window.location.href='{{ route('seat-select') }}'" class="game-item">
+            <div onclick="window.location.href='{{ route('seat') }}'" class="game-item">
                 <p class="game-title">E高校 VS F高校</p>
                 <p class="game-status">△</p>
             </div>
@@ -94,20 +94,20 @@
             <img src="image/dome-890x500.jpg" alt="Game1" class="purchase-image"/>
             <p class="purchase-title">A高校 VS B高校</p>
             <p class="purchase-status">◎空席あり</p>
-            <button class="purchase-button" onclick="window.location.href='{{ route('seat-select') }}'">購入する</button>
+            <button class="purchase-button" onclick="window.location.href='{{ route('seat') }}'">購入する</button>
         </div>
         <div class="purchase-card">
             <img src="image/dome-890x500.jpg" alt="Game2" class="purchase-image"/>
             <p class="purchase-title">C高校 VS D高校</p>
             <p class="purchase-status">△残り僅か</p>
-            <button class="purchase-button" onclick="window.location.href='{{ route('seat-select') }}'">購入する</button>
+            <button class="purchase-button" onclick="window.location.href='{{ route('seat') }}'">購入する</button>
         </div>
         
         <div class="purchase-card">
             <img src="image/dome-890x500.jpg" alt="Game3" class="purchase-image"/>
             <p class="purchase-title">E高校 VS F高校</p>
             <p class="purchase-status">×売り切れ</p>
-            <button class="purchase-button" onclick="window.location.href='{{ route('seat-select') }}'">購入する</button>
+            <button class="purchase-button" onclick="window.location.href='{{ route('seat') }}'">購入する</button>
         </div>
     </div>
 
