@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const timeInput = document.getElementById('end_time');
     const timeDisplay = document.getElementById('time');
     const startTimeStr = timeInput.value; // スタート時間の設定 (例: '12:04:00')
-    if(startTimeStr != "00:00:00"){
+    console.log(startTimeStr)
+    if(startTimeStr != "00:00:00" &&  startTimeStr != ""){
         // 時間を表示する関数
         function displayTime() {
             const now = new Date();

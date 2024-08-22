@@ -28,7 +28,7 @@
     <input type="hidden" value="{{$order->actual_end_time}}" id="end_time">
     <p>{{$order->actual_end_time}}</p>
     <div id="container">
-      <div id="time">00:00:00.000</div>
+      <div id="time">00:00:00</div>
     </div>
     <p><b>
     @php
