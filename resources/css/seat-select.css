@@ -1,70 +1,84 @@
 /* 全体のレイアウト */
 .layout-section {
     display: flex;
-    align-items: flex-start; /* 上揃え */
-    width: 100%; /* コンテナを100%幅に設定 */
+    align-items: flex-start;
+    width: 100%;
 }
 
 /* 画像のラッパー */
 .image-wrapper {
-    flex: 1; /* 画像のラッパーが1:1の比率を占める */
+    flex: 1; /* 画像部分の比率を増やす */
     display: flex;
-    justify-content: center; /* 画像を中央に配置 */
-    align-items: center; /* 画像を中央に配置 */
+    margin-left: 10%;
 }
 
 /* 画像のスタイル */
 .seat-select-img {
-    width: 100%; /* 画像が親要素の幅に合わせる */
-    height: auto; /* 高さは自動で調整 */
+    border: solid 1px #000000;
+    width: 80%; /* 画像の幅を少し大きく */
+    margin: 3%;
+    height: auto;
 }
 
 /* 詳細情報のラッパー */
 .details-wrapper {
-    flex: 1; /* 詳細情報のラッパーが1:1の比率を占める */
-    margin-left: 1rem; /* 左にマージンを追加してスペースを確保 */
+    flex: 2; /* 詳細部分の比率を減らす */
+    padding: 20px;
+    border: 1px #adadad solid;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    margin: 20px 20px 20px 1rem;
+    max-width: 350px; /* 最大幅を設定 */
+    margin-right: 10%;
 }
 
 /* 各詳細行のスタイル */
 .detail-line {
     margin: auto;
-    width: 50%;
-    border-radius: 5px;
-    border: 1px solid #b6b6b6; /* 枠線の色と幅を設定 */
-    margin-bottom: 0.5rem; /* 各行の間にスペースを追加 */
-    padding: 0.5rem; /* 内部にパディングを追加 */
-    background-color: #f9f9f9; /* 背景色を設定 */
+    width: 100%; /* 幅を100%に */
+    padding: 0.3rem; /* パディングを少し減らす */
+    background-color: #f9f9f9;
 }
 
 /* テキストのスタイル */
-.detail-line-p {
-    text-decoration: none;
-    margin-left:  0; /* パラグラフのマージンを取り除く */
-    color: #000; /* 文字色を黒に設定 */
+.detail-line p {
+    margin: 5px;
+    color: #000;
 }
 
 /* マッチ詳細のスタイル */
 .match-details p {
-    font-size: 1.2rem; /* フォントサイズを調整 */
-    font-weight: bold; /* 太字にする */
+    text-align: left;
+    font-size: 1rem; /* フォントサイズを少し小さく */
+    font-weight: bold;
 }
 
 .match-details h1 {
-    font-size: 1.5rem; /* フォントサイズを調整 */
+    text-align: left;
+    font-size: 1.2rem; /* フォントサイズを少し小さく */
 }
 
 /* 座席詳細のスタイル */
 .seat-details {
-    margin-top: 1rem; /* 上にマージンを追加 */
+    margin-top: 0.5rem; /* マージンを少し減らす */
 }
+
 .detail-line a {
     color: rgb(37, 94, 35) !important;
     text-decoration: none;
-    font-weight:bold; 
+    font-weight: bold;
+    margin: 5px;
 }
 
 .detail-line a:hover {
     color: rgb(0, 141, 33) !important;
-    text-decoration: none;
-    font-weight:bold; 
+}
+
+.seat-link, .seat-link2 {
+    text-align: left;
+}
+
+.seat-link3 {
+    top: 0%;
+    text-align: right;
 }

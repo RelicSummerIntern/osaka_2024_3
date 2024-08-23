@@ -9,13 +9,14 @@
         <div class="match-details">
             <p>第一試合</p>
             <h1>A高校対B高校</h1>
+            <p>----------------------------------------------</p>
         </div>
             @foreach($seats as $seat)
             <div class="detail-line">
                 @if(empty($seat->buyer_id))
-                <p class="seat-link"><a href="{{ route('tickets.create',['seat_number_id'=>$seat->seat_id,'game_id'=>$seat->id])}}">{{$seat->seat_name}}:〇</a></p>
+                <p class="seat-link">☆　<a href="{{ route('tickets.create',['seat_number_id'=>$seat->seat_id,'game_id'=>$seat->id])}}">{{$seat->seat_name}}:〇</a></p>
                 @else
-                <p>{{$seat->seat_name}}:×</p>
+                <p class="seat-link2">☆　{{$seat->seat_name}}:×</p>
                 @endif
             </div>
             @endforeach
