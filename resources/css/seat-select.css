@@ -15,7 +15,7 @@
 /* 画像のスタイル */
 .seat-select-img {
     border: solid 1px #000000;
-    width: 80%; /* 画像の幅を少し大きく */
+    width: 65%; /* 画像の幅を少し大きく */
     margin: 3%;
     height: auto;
 }
