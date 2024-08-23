@@ -66,7 +66,7 @@
                 }
                 if($count > 1){
                     $icon = "×";
-                }elseif ($count > 0.6) {
+                }elseif ($count > 0.5) {
                     $icon = "△";
                 }else{
                     $icon = "◎";
@@ -121,7 +121,7 @@
             }
             if($count > 1){
                 $icon = "×";
-            }elseif ($count > 0.6) {
+            }elseif ($count > 0.5) {
                 $icon = "△";
             }else{
                 $icon = "◎";

@@ -21,7 +21,7 @@
 
                 <div class="hidden space-x-2 sm:-my-px sm:ml-10 sm:mr-10 sm:flex sm:justify-between">
                     <x-nav-link :href="route('home')" class="text-decoration-none">
-                    ticket　
+                    ticket
                     </x-nav-link>
                     <x-nav-link :href="route('register')" :active="request()->routeIs('register')" class="text-decoration-none">
                     contact
